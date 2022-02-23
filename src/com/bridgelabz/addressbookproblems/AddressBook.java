@@ -1,8 +1,7 @@
 /*Ability to edit
-existing contact
-person using their
-name - Use Console to edit person details
-*/
+ *Ability to delete contact in address book using first name
+ * i/p from user for choice operation
+ */
 package com.bridgelabz.addressbookproblems;
 
 import java.util.ArrayList;
@@ -17,11 +16,12 @@ public class AddressBook {
 			try (Scanner sc1 = new Scanner(System.in)) {
 				int choice;
 				do {
-					System.out.println("1.INSERT" + "\n2.DISPLAY" + "\n3.EDIT");
+					System.out.println("1.INSERT" + "\n2.DISPLAY" + "\n3.EDIT" + "\n4.Delete");
 					System.out.println("Enter your 1st choice");
 					choice = sc.nextInt();
 
 					switch (choice) {
+					// To Add Contact
 					case 1:
 						System.out.print("Enter First Name: ");
 						String firstName1 = sc1.nextLine();
@@ -43,9 +43,15 @@ public class AddressBook {
 								email);
 						array.add(contact);
 						break;
+					// To Display Contact
 					case 2:
-						System.out.println(array);
-						break;
+						java.util.Iterator<Contact> iterator = array.iterator();
+						while (iterator.hasNext()) {
+							contact = iterator.next();
+							System.out.println(array);
+							break;
+						}
+						// To Edit Contact
 					case 3:
 						boolean found = false;
 						System.out.println("Enter first name of the person for update ");
@@ -60,8 +66,10 @@ public class AddressBook {
 
 						while (listIterator.hasNext()) {
 							contact = listIterator.next();
-
-							if (contact.getFirstName().equals(firstName1)) { // entering the condition if fname matches
+							/*
+							 * Entering the condition if firstname matches
+							 */
+							if (contact.getFirstName().equals(firstName1)) {
 
 								System.out.print("Enter new first Name: ");
 								firstName1 = sc1.nextLine();
@@ -77,7 +85,7 @@ public class AddressBook {
 								zipcode = sc.nextInt();
 								System.out.print("Enter phone number: ");
 								phoneNo = sc1.nextLine();
-								System.out.print("Enter your eMail ID: ");
+								System.out.print("Enter your email ID: ");
 								email = sc1.nextLine();
 								listIterator.set(new Contact(firstName1, lastName, address, city, state, zipcode,
 										phoneNo, email));
@@ -87,18 +95,41 @@ public class AddressBook {
 						System.out.println("_____________________________________");
 
 						if (!found) {
-							System.out.println("Record not found");// o/p for mismatch first name
+							System.out.println("Record not found");
 						} else {
 							System.out.println("Record is updated successfully");
 						}
 						System.out.println("_______________________________________");
 						break;
+					// To Delete Contact
+					case 4:
+						found = false;
+						System.out.println("Enter first name of the person for delete ");
+						firstName1 = sc1.nextLine();
+						System.out.println("____________________________________");
+						iterator = array.iterator();
+						while (iterator.hasNext()) {
+							contact = iterator.next();
+							if (contact.getFirstName().equals(firstName1)) {
+								iterator.remove();
+								found = true;
+							}
+						}
+						System.out.println("____________________________________");
+						if (!found) {
+							System.out.println("Record not found");
+						} else {
+							System.out.println("Record is deleted successfully");
+						}
+						System.out.println("_____________________________________");
+						break;
+
 					default:
 						System.out.println("default");
 
 					}
 				} while (choice != 0);
-				System.out.println("Invalid Choice!!");
+				System.out.println("Invalid Choice!!"); // Print Invalid Result In Contact
 			}
 		}
 	}
