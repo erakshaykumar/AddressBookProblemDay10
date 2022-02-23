@@ -1,5 +1,4 @@
-/*Ability to edit
- *Ability to delete contact in address book using first name
+/*Ability to ADD MULTIPLE contact in address book using first name
  * i/p from user for choice operation
  */
 package com.bridgelabz.addressbookproblems;
