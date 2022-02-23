@@ -4,45 +4,47 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook {
-	static Scanner scanner = new Scanner(System.in);
-	ArrayList<Contact> person = new ArrayList<>();
-
-	// add new person record to array list after taking input
-
-	public void addPerson() {
-		System.out.println("Enter the First Name");
-		String firstName = scanner.next();
-		System.out.println("Enter the Last Name");
-		String lastName = scanner.next();
-		System.out.println("Enter the Address");
-		String address = scanner.next();
-		System.out.println("Enter the City");
-		String city = scanner.next();
-		System.out.println("Enter the State");
-		String state = scanner.next();
-		System.out.println("Enter the Zip");
-		int zipcode = scanner.nextInt();
-		System.out.println("Enter the PhoneNumber");
-		String phoneNo = scanner.next();
-		System.out.println("Enter the Email");
-		String email = scanner.next();
-
-		// creating constructor
-		Contact contact = new Contact(firstName, lastName, address, city, zipcode, state, phoneNo, email);
-
-		// add the above list to to Contacts array list
-		person.add(contact);
-
-		// printing contacts object data inside
-		System.out.println(contact);
-
-	}
-
 	public static void main(String[] args) {
-		System.out.println("Welcome to Address Book Program");
-		AddressBook address = new AddressBook();
-		address.addPerson();
+		System.out.println("Welcome to the address book system");
+		ArrayList<Contact> array = new ArrayList<Contact>();
+		try (Scanner sc = new Scanner(System.in)) {
+			try (Scanner sc1 = new Scanner(System.in)) {
+				int choice;
+				do {
+					System.out.println("1.INSERT");
+					System.out.println("2.DISPLAY");
+					System.out.println("Enter your choice");
+					choice = sc.nextInt();
 
+					switch (choice) {
+					case 1:
+						System.out.print("Enter First Name: ");
+						String firstName = sc1.nextLine();
+						System.out.print("Enter last Name: ");
+						String lastName = sc1.nextLine();
+						System.out.print("Enter your address: ");
+						String address = sc1.nextLine();
+						System.out.print("Enter your city: ");
+						String city = sc1.nextLine();
+						System.out.print("Enter your state: ");
+						String state = sc1.nextLine();
+						System.out.print("Enter zip code : ");
+						int zipcode = sc.nextInt();
+						System.out.print("Enter phone number: ");
+						String phoneNo = sc1.nextLine();
+						System.out.print("Enter your email: ");
+						String email = sc1.nextLine();
+						Contact contact = new Contact(firstName, lastName, address, city, state, zipcode, phoneNo,
+								email);
+						array.add(contact);
+						break;
+					case 2:
+						System.out.println(array);
+						break;
+					}
+				} while (choice != 0);
+				System.out.println("Invalid Choice!!!");
+			}
+		}
 	}
-
 }
